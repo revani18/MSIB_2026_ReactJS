@@ -1,4 +1,4 @@
-function Book() {
+export default function ProductList() {
   return (
     <>
       <section id="book" className="py-5 text-center container">
@@ -371,5 +371,3 @@ function Book() {
     </>
   );
 }
-
-export default Book;

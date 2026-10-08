@@ -1,20 +1,30 @@
-import Header from "./components/Header";
-import Home from "./components/Home";
-import Book from "./components/Book";
-import Team from "./components/Team";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import { BrowserRouter, Route, Routes } from "react-router";
+import Home from "./pages";
+import Books from "./pages/books";
+import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
+import Team from "./pages/team";
+import Contact from "./pages/kontak";
 
-function App() {
+function  App() {
   return (
+    <>
     <div className="container">
-      <Header />
-      <Home />
-      <Book />
-      <Team />
-      <Contact />
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="books" element={<Books />} />
+          <Route path="team" element={<Team />} />
+          <Route path="contact" element={<Contact />} />
+
+          <Route path="auth">
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
+    </>
   );
 }
 

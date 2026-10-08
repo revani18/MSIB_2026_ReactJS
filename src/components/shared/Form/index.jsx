@@ -1,4 +1,4 @@
-function Contact() {
+export default function Form() {
   return (
     <section id="contact" className="container px-4 py-5">
       <h2 className="pb-2 border-bottom">Hubungi Kami</h2>
@@ -56,5 +56,3 @@ function Contact() {
     </section>
   );
 }
-
-export default Contact;

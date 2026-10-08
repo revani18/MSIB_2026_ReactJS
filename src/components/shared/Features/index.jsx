@@ -1,4 +1,4 @@
-function Team() {
+export default function Features() {
   return (
     <section id="team" className="container px-4 py-5">
       <h2 className="pb-2 border-bottom">Tim Kami</h2>
@@ -56,5 +56,3 @@ function Team() {
     </section>
   );
 }
-
-export default Team;
