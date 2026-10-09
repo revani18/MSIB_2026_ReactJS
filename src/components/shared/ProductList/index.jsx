@@ -1,373 +1,173 @@
+import { useState } from "react";
+import books from "../../../Utils/books";
+import styles from "../../../styles/ProductList.module.css";
+
+// tambah buku baru saat klik button tambah buku
+const newBookTemplate = {
+  title: "Hujan",
+  author: "Tere Liye",
+  year: 2016,
+  description: "Novel tentang sebuah kisah petualangan, refleksi mendalam tentang kehidupan, cinta, kehilangan, dan harapan.",
+  image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWyeeGIabPiR5IVZlOKGJWsV-amAp5RAA45dWrzEAXbRfej6aZSovbP_ga&s=10",
+  price: "Rp 98.000",
+};
+
 export default function ProductList() {
+  // Hooks: state data buku.
+  const [booksList, setBooksList] = useState([...books]);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [cartCount, setCartCount] = useState(0);
+
+  // menambahkan data dengan spread operator.
+  const handleClick = () => {
+    const newBook = {
+      ...newBookTemplate,
+      id: Math.max(...booksList.map((item) => item.id), 0) + 1,
+    };
+    setBooksList((prevList) => [...prevList, newBook]);
+    alert("Buku baru berhasil ditambahkan!");
+  };
+  const handleBuy = (book) => {
+    setCartCount((prevCount) => prevCount + 1);
+    alert(`Buku "${book.title}" ditambahkan ke keranjang!`);
+  };
+  
   return (
     <>
       <section id="book" className="py-5 text-center container">
-          <div className="row py-lg-5">
-            <div className="col-lg-6 col-md-8 mx-auto">
-              <h1 className="fw-light">Jelajahi Koleksi Buku Kami</h1>
-              <p className="lead text-body-secondary">
-                Temukan berbagai pilihan buku yang telah kami pilih untuk
-                memenuhi kebutuhan setiap pembaca. Mulai dari cerita yang
-                menginspirasi, petualangan yang menarik, hingga buku yang
-                menambah pengetahuan dan pengembangan diri. BookSales membantu
-                kamu menemukan buku yang sesuai dengan minat dan kebutuhanmu.
-                Jelajahi koleksi kami dan temukan buku favoritmu.
-              </p>
-              <p>
-                <a href="#" className="btn btn-primary my-2 m-2">
-                  Lihat
-                </a>
-                <a href="#" className="btn btn-secondary my-2">
-                  Buku Lainnya
-                </a>
-              </p>
-            </div>
-          </div>
-        </section>
-        <div className="album py-5 bg-body-tertiary">
-          <div className="container">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://jbr.id/wp-content/uploads/atomic-habits-1.jpg"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Atomic Habits</h3>
-                    <small className="text-body-secondary">James Clear</small>
-                    <p className="card-text mt-2">
-                      Buku tentang cara membangun kebiasaan baik melalui
-                      perubahan kecil yang dilakukan secara konsisten.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 150.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcN759QYZubLElQPlu7jo1-sj6x5ql6ua4OHQrPobQFu6-aYzY3R47AuR9m5IPFVOT2X3dDQ1BtAYesFknsCY-un1qJZepq1UYzG17blhTJwtjjOQMYup0pCLsYTeUOV2z5oIb0MrVtIZ8VGlGkhKofEBK_1VGvfqWbDMf_kYk0a_sT860uMJ1xlsJqQ/s4032/Sinopsis%20Novel%20Sejarah%20Laut%20Bercerita.jpg"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Laut Bercerita</h3>
-                    <small className="text-body-secondary">
-                      Leila S.Chudori
-                    </small>
-                    <p className="card-text mt-2">
-                      Novel tentang persahabatan, keluarga, perjuangan, dan
-                      kehilangan dengan latar kehidupan sosial-politik
-                      Indonesia.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 115.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://bookmarkandworld.com/cdn/shop/files/WhatsAppImage2024-10-06at4.15.37PM_1.jpg?v=1728211642"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">The Alchemist</h3>
-                    <small className="text-body-secondary">Paulo Cuelho</small>
-                    <p className="card-text mt-2">
-                      Cerita perjalanan seorang pemuda dalam mengejar impian dan
-                      menemukan makna dari perjalanan hidupnya.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 105.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://down-id.img.susercontent.com/file/id-11134207-7rbk6-mart1uxfeip0d6"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Laskar Pelangi</h3>
-                    <small className="text-body-secondary">Andrea Hirata</small>
-                    <p className="card-text mt-2">
-                      Kisah perjuangan dan persahabatan sekelompok anak dalam
-                      mengejar pendidikan dan meraih impian.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">Rp 95.000</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://cdn.mediajabar.com/2023/08/novel-bumi-manusia.webp"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Bumi Manusia</h3>
-                    <small className="text-body-secondary">
-                      Pramoedya Ananta Toer
-                    </small>
-                    <p className="card-text mt-2">
-                      Novel yang menceritakan kehidupan, pendidikan, cinta, dan
-                      perjuangan dalam latar masa kolonial.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 110.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://penerbitbaca.com/wp-content/uploads/2023/10/The-Psychology-of-Money.jpg"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">The Psychology of Money</h3>
-                    <small className="text-body-secondary">Morgan Housel</small>
-                    <p className="card-text mt-2">
-                      Membahas cara manusia berpikir dan mengambil keputusan
-                      mengenai uang, kekayaan, dan keuangan.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 135.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://filebroker-cdn.lazada.co.id/kf/Sa6e36ecff3ac4042a2e9ed3fe2bb75fdQ.jpg"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Negeri 5 Menara</h3>
-                    <small className="text-body-secondary">Ahmad Fuadli</small>
-                    <p className="card-text mt-2">
-                      Kisah persahabatan dan perjuangan sekelompok santri dalam
-                      mengejar cita-cita dan masa depan.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 100.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://down-id.img.susercontent.com/file/sg-11134201-7rdyu-mcn42bokjha80a"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Perahu Kertas</h3>
-                    <small className="text-body-secondary">Dee Lestari</small>
-                    <p className="card-text mt-2">
-                      Kisah tentang cinta, impian, persahabatan, dan perjalanan
-                      menemukan jati diri.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 100.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card shadow-sm">
-                  <img
-                    src="https://down-id.img.susercontent.com/file/sg-11134201-8259d-mrl613ab0dms4d"
-                    alt=""
-                    height={300}
-                    width={"100%"}
-                  />
-                  <div className="card-body">
-                    <h3 className="card-title">Rich Dad Poor Dad</h3>
-                    <small className="text-body-secondary">
-                      Robert T.Kiyosaki
-                    </small>
-                    <p className="card-text mt-2">
-                      Membahas pola pikir mengenai uang, investasi, dan
-                      pentingnya pendidikan finansial.
-                    </p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Lihat
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-primary"
-                        >
-                          Beli
-                        </button>
-                      </div>
-                      <strong className="text-body-secondary">
-                        Rp 125.000
-                      </strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className="row py-lg-5">
+          <div className="col-lg-8 col-md-10 mx-auto">
+            <h1 className="fw-light">Jelajahi Koleksi Buku Kami</h1>
+            <p className="lead text-body-secondary">
+              Temukan berbagai pilihan buku yang telah kami pilih untuk memenuhi
+              kebutuhan setiap pembaca. Mulai dari cerita yang menginspirasi,
+              petualangan yang menarik, hingga buku yang menambah pengetahuan dan
+              pengembangan diri. BookSales membantu kamu menemukan buku yang
+              sesuai dengan minat dan kebutuhanmu.
+            </p>
+            {/* tombol tambah dan keranjang */}
+            <button
+              type="button"
+              className={`btn btn-primary my-2 ${styles.addButton}`}
+              onClick={handleClick}
+            >
+              <i className="fa-solid fa-plus me-2" aria-hidden="true" />
+              Tambah Buku Baru
+            </button>
+            <span className={`ms-3 ${styles.cartCounter}`} aria-live="polite">
+              <i className="fa-solid fa-cart-shopping me-1" aria-hidden="true" />
+              Keranjang: {cartCount}
+            </span>
           </div>
         </div>
+      </section>
+
+      <div className="album py-5 bg-body-tertiary">
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            {/* menampilkan buku dengan map() */}
+            {booksList.map((item) => (
+              <div className="col" key={item.id}>
+                <article className={`card h-100 ${styles.bookCard}`}>
+                  <div className={styles.bookImageWrap}>
+                    <img
+                      src={item.image}
+                      alt={`Sampul buku ${item.title}`}
+                      className={styles.bookCover}
+                      loading="lazy"
+                      onError={(event) => {
+                        event.currentTarget.classList.add(styles.bookCoverUnavailable);
+                      }}
+                    />
+                  </div>
+                  <div className="card-body d-flex flex-column">
+                    <h3 className={`card-title ${styles.bookTitle}`}>{item.title}</h3>
+                    <small className="text-body-secondary">Penulis: {item.author}</small>
+                    <p className="text-body-secondary small mb-1">
+                      Tahun: {item.year}
+                    </p>
+                    <p className={`card-text mt-2 ${styles.bookDescription}`}>
+                      {item.description}
+                    </p>
+                    <div className="d-flex justify-content-between align-items-center gap-2 mt-auto pt-3">
+                      <div className="btn-group" role="group" aria-label={`Aksi untuk ${item.title}`}>
+                        {/* tombol lihat dan beli */}
+                        <button
+                          type="button"
+                          className={`btn btn-sm btn-outline-primary ${styles.actionButton}`}
+                          onClick={() => setSelectedBook(item)}
+                        >
+                          <i className="fa-regular fa-eye me-1" aria-hidden="true" />
+                          Lihat
+                        </button>
+                        <button
+                          type="button"
+                          className={`btn btn-sm btn-primary ${styles.actionButton}`}
+                          onClick={() => handleBuy(item)}
+                        >
+                          <i className="fa-solid fa-cart-plus me-1" aria-hidden="true" />
+                          Beli
+                        </button>
+                      </div>
+                      <strong className={styles.bookPrice}>{item.price}</strong>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {selectedBook && (
+        <div
+          className={styles.modalBackdrop}
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSelectedBook(null);
+          }}
+        >
+          <section
+            className={styles.bookModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="book-modal-title"
+          >
+            <button
+              type="button"
+              className={styles.modalClose}
+              aria-label="Tutup detail buku"
+              onClick={() => setSelectedBook(null)}
+            >
+              &times;
+            </button>
+            <div className={styles.modalContent}>
+              <img src={selectedBook.image} alt={`Sampul ${selectedBook.title}`} />
+              <div>
+                <p className="text-primary fw-semibold mb-2">DETAIL BUKU</p>
+                <h2 id="book-modal-title">{selectedBook.title}</h2>
+                <p className="text-body-secondary mb-1">
+                  Penulis: {selectedBook.author}
+                </p>
+                <p className="text-body-secondary">Tahun terbit: {selectedBook.year}</p>
+                <p>{selectedBook.description}</p>
+                <p className="fs-5 fw-bold">{selectedBook.price}</p>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    handleBuy(selectedBook);
+                    setSelectedBook(null);
+                  }}
+                >
+                  <i className="fa-solid fa-cart-plus me-2" aria-hidden="true" />
+                  Beli Buku
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
     </>
   );
 }
